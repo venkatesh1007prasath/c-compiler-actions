@@ -1,0 +1,23 @@
+name: C CI
+
+on:
+  push:
+      branches: [ main ]
+  pull_request:
+      branches: [ main ]
+
+jobs:
+  build-and-test:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: run Super-Linter
+        uses: github/super-linter@v3.17.0
+
+      - name: build the code
+        run: gcc src/hello_there.c -o src/hello_there
+      
+      - name: execute the code
+        run: src/hello_there
